@@ -1,0 +1,16 @@
+c:\users\rodolfo\documents\visual studio 2015\Projects\UARTTest\UARTTest\bin\Debug\UARTTest.exe.config
+c:\users\rodolfo\documents\visual studio 2015\Projects\UARTTest\UARTTest\bin\Debug\UARTTest.exe
+c:\users\rodolfo\documents\visual studio 2015\Projects\UARTTest\UARTTest\bin\Debug\UARTTest.pdb
+c:\users\rodolfo\documents\visual studio 2015\Projects\UARTTest\UARTTest\obj\Debug\UARTTest.csprojResolveAssemblyReference.cache
+c:\users\rodolfo\documents\visual studio 2015\Projects\UARTTest\UARTTest\obj\Debug\UARTTest.FormMain.resources
+c:\users\rodolfo\documents\visual studio 2015\Projects\UARTTest\UARTTest\obj\Debug\UARTTest.Properties.Resources.resources
+c:\users\rodolfo\documents\visual studio 2015\Projects\UARTTest\UARTTest\obj\Debug\UARTTest.csproj.GenerateResource.Cache
+c:\users\rodolfo\documents\visual studio 2015\Projects\UARTTest\UARTTest\obj\Debug\UARTTest.exe
+c:\users\rodolfo\documents\visual studio 2015\Projects\UARTTest\UARTTest\obj\Debug\UARTTest.pdb
+E:\Projetos\Eletronica\PRC\Programador FTDI AT89S8253\UARTTest\bin\Debug\UARTTest.exe.config
+E:\Projetos\Eletronica\PRC\Programador FTDI AT89S8253\UARTTest\obj\Debug\UARTTest.exe
+E:\Projetos\Eletronica\PRC\Programador FTDI AT89S8253\UARTTest\obj\Debug\UARTTest.pdb
+E:\Projetos\Eletronica\PRC\Programador Arduino AT89S8253\UARTTest\bin\Debug\UARTTest.exe.config
+E:\Projetos\Eletronica\PRC\Programador Arduino AT89S8253\UARTTest\obj\Debug\UARTTest.exe
+E:\Projetos\Eletronica\PRC\Programador Arduino AT89S8253\UARTTest\obj\Debug\UARTTest.pdb
+E:\Projetos\Eletronica\PRC\Programador Arduino AT89S8253\UARTTest\bin\Debug\ArduinoProgrammer.exe.config

@@ -1,0 +1,26 @@
+E:\Projetos\Eletronica\PRC\Programador Arduino AT89S8253\UARTTest\bin\Debug\ArduinoProgrammer.exe.config
+E:\Projetos\Eletronica\PRC\Programador Arduino AT89S8253\UARTTest\bin\Debug\ArduinoProgrammer.exe
+E:\Projetos\Eletronica\PRC\Programador Arduino AT89S8253\UARTTest\bin\Debug\ArduinoProgrammer.pdb
+E:\Projetos\Eletronica\PRC\Programador Arduino AT89S8253\UARTTest\obj\Debug\ArduinoProgrammer.csprojResolveAssemblyReference.cache
+E:\Projetos\Eletronica\PRC\Programador Arduino AT89S8253\UARTTest\obj\Debug\UARTTest.FormMain.resources
+E:\Projetos\Eletronica\PRC\Programador Arduino AT89S8253\UARTTest\obj\Debug\ArduinoProgrammer.Properties.Resources.resources
+E:\Projetos\Eletronica\PRC\Programador Arduino AT89S8253\UARTTest\obj\Debug\ArduinoProgrammer.csproj.GenerateResource.Cache
+E:\Projetos\Eletronica\PRC\Programador Arduino AT89S8253\UARTTest\obj\Debug\ArduinoProgrammer.exe
+E:\Projetos\Eletronica\PRC\Programador Arduino AT89S8253\UARTTest\obj\Debug\ArduinoProgrammer.pdb
+E:\Projetos\Eletronica\PRC\Programador Arduino AT89S8253 2\UARTTest\bin\Debug\ArduinoProgrammer.exe.config
+E:\Projetos\Eletronica\PRC\Programador Arduino AT89S8253 2\UARTTest\obj\Debug\ArduinoProgrammer.exe
+E:\Projetos\Eletronica\PRC\Programador Arduino AT89S8253 2\UARTTest\obj\Debug\ArduinoProgrammer.pdb
+E:\Projetos\Eletronica\PRC\Programador Arduino AT89S8253 2\UARTTest\bin\Debug\ArduinoProgrammer.exe
+E:\Projetos\Eletronica\PRC\Programador Arduino AT89S8253 2\UARTTest\bin\Debug\ArduinoProgrammer.pdb
+E:\Projetos\Eletronica\PRC\Programador Arduino AT89S8253 2\UARTTest\obj\Debug\UARTTest.FormMain.resources
+E:\Projetos\Eletronica\PRC\Programador Arduino AT89S8253 2\UARTTest\obj\Debug\ArduinoProgrammer.Properties.Resources.resources
+E:\Projetos\Eletronica\PRC\Programador Arduino AT89S8253 2\UARTTest\obj\Debug\ArduinoProgrammer.csproj.GenerateResource.Cache
+E:\Projetos\Eletronica\PRC ATMega328P\Programador Arduino AT89S8253 2\UARTTest\bin\Debug\ArduinoProgrammer.exe.config
+E:\Projetos\Eletronica\PRC ATMega328P\Programador Arduino AT89S8253 2\UARTTest\obj\Debug\ArduinoProgrammer.exe
+E:\Projetos\Eletronica\PRC ATMega328P\Programador Arduino AT89S8253 2\UARTTest\obj\Debug\ArduinoProgrammer.pdb
+E:\Projetos\Eletronica\PRC ATMega328P\Programador Arduino AT89S8253 2\UARTTest\bin\Debug\ArduinoProgrammer.exe
+E:\Projetos\Eletronica\PRC ATMega328P\Programador Arduino AT89S8253 2\UARTTest\bin\Debug\ArduinoProgrammer.pdb
+E:\Projetos\Eletronica\PRC ATMega328P\Programador Arduino AT89S8253 2\UARTTest\obj\Debug\ArduinoProgrammer.csprojResolveAssemblyReference.cache
+E:\Projetos\Eletronica\PRC ATMega328P\Programador Arduino AT89S8253 2\UARTTest\obj\Debug\UARTTest.FormMain.resources
+E:\Projetos\Eletronica\PRC ATMega328P\Programador Arduino AT89S8253 2\UARTTest\obj\Debug\ArduinoProgrammer.Properties.Resources.resources
+E:\Projetos\Eletronica\PRC ATMega328P\Programador Arduino AT89S8253 2\UARTTest\obj\Debug\ArduinoProgrammer.csproj.GenerateResource.Cache
