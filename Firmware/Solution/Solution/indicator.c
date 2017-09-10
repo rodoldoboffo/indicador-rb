@@ -43,6 +43,7 @@
  const unsigned char OVERFLOW_PROTECTION_PERCENTAGE_COMMAND[] = "ovfpct=";
  const unsigned char TOGGLE_OVERFLOW_PROTECTION_COMMAND[] = "ovfchk=";
  const unsigned char ZERO_COMMAND[] = "zero";
+ const unsigned char CLEAR_PEAK_COMMAND[] = "clpk";
  const unsigned char READY[] = "ready\n";
  
  const unsigned char forceUnitsString[][5] = {
@@ -63,7 +64,8 @@
  unsigned char selectedPoint = 0;
  unsigned char calibratedPoints = 0;
  unsigned char calibrationUnit = 0;
- long int lastAdData = 0L, peakAdValue = 0L;
+ long int lastAdData = 0L;
+ float peakForceValue = 0.0;
  unsigned char adFetchStop = 0;
  float newPointValue = 0.0;
 
@@ -211,6 +213,10 @@ void processDisplayMessages() {
 			playLowBuzz(BEEP_DURATION);
 			processZeroCommand(displayCommandBuffer);
 		}
+		else if ((unsigned char *)strstr(displayCommandBuffer, CLEAR_PEAK_COMMAND) == displayCommandBuffer) {
+			playLowBuzz(BEEP_DURATION);
+			processClearPeakCommand(displayCommandBuffer);
+		}
 	}
 }
 
@@ -232,6 +238,11 @@ void processZeroCommand(const unsigned char *displayCommandBuffer) {
 		float zeroIntersection = getAdjustedForceValue(lastAdData, calibrationUnit, calibrationUnit);
 		fittedStraightLineCoef[0] -= zeroIntersection;
 	}
+	updateMainNumbers();
+}
+
+void processClearPeakCommand(const unsigned char *displayCommandBuffer) {
+	peakForceValue = 0.0;
 	updateMainNumbers();
 }
 
@@ -639,7 +650,6 @@ void loadStoredParameters() {
 long publishForceRawValue() {
 	unsigned long tick;
 	lastAdData = adcFetchData();
-	if (lastAdData > peakAdValue) peakAdValue = lastAdData;
 	tick = timerTick;
 	testSpeedCalculationArray[testSpeedCalcArrayIndex].rawForceValue = lastAdData;
 	testSpeedCalculationArray[testSpeedCalcArrayIndex].timeTick = tick;
@@ -783,9 +793,13 @@ float getAdjustedForceValue(long lastAdData, unsigned char calibrationUnit, unsi
 
 float getAdjustedTensionValue(long lastAdData, unsigned char calibrationUnit, float sampleArea, unsigned char displayTensionUnit) {
 	float value = getAdjustedValue(lastAdData);
-	value = convertForceValue(value, calibrationUnit, N);
+	return convertForceToTension(value, calibrationUnit, sampleArea, displayTensionUnit);
+}
+
+float convertForceToTension(float forceValue, unsigned char forceUnit, float sampleArea, unsigned char tensionUnit) {
+	float value = convertForceValue(forceValue, forceUnit, N);
 	value /= sampleArea;
-	return convertTensionValue(value, MPA, displayTensionUnit);
+	return convertTensionValue(value, MPA, tensionUnit);
 }
 
 void updateDisplayUnit() {
@@ -863,6 +877,32 @@ float getMainDisplayValue() {
 	return value;
 }
 
+const unsigned char* getDisplayUnitStr() {
+	if (displayUnitType == FORCE_UNIT) {
+		return (const unsigned char*)(&forceUnitsString[displayForceUnit]);
+		//#ifdef DEBUG
+		//softwareSerialPrint("\nTest Speed: ");
+		//softwareSerialPrint("\n");
+		//softwareSerialPrintLong(lastTestSpeed);
+		//softwareSerialPrint("\n");
+		//softwareSerialPrintFloat(speedTestValue, 5);
+		//softwareSerialPrint("\n");
+		//#endif
+	}
+	else {
+		return (const unsigned char*)(&tensionUnitsString[displayTensionUnit]);
+	}
+}
+
+void updatePeakForce() {
+	float newPeakForce = 0.0;
+	if (calibratedPoints >= 2) {
+		newPeakForce = getAdjustedForceValue(lastAdData, calibrationUnit, calibrationUnit);
+		if (newPeakForce > peakForceValue) {
+			peakForceValue = newPeakForce;
+		}
+	}
+}
 
 float getPeakValue() {
 	float value = NAN;
@@ -875,7 +915,7 @@ float getPeakValue() {
 		//softwareSerialPrint("\n");
 		//#endif
 		if (displayUnitType == FORCE_UNIT) {
-			value = getAdjustedForceValue(peakAdValue, calibrationUnit, displayForceUnit);
+			value = convertForceValue(peakForceValue, calibrationUnit, displayForceUnit);
 			//#ifdef DEBUG
 			//softwareSerialPrint("\nTest Speed: ");
 			//softwareSerialPrint("\n");
@@ -886,7 +926,7 @@ float getPeakValue() {
 			//#endif
 		}
 		else {
-			value = getAdjustedTensionValue(peakAdValue, calibrationUnit, sampleArea, displayTensionUnit);
+			value = convertForceToTension(peakForceValue, calibrationUnit, sampleArea, displayTensionUnit);
 		}
 	}
 	return value;
@@ -928,10 +968,11 @@ void updateMainPage() {
 }
 
 void updateMainNumbers() {
-	unsigned char buffer[12] = {0};
+	unsigned char buffer[16] = {0};
 	float displayValue, testSpeedValue, peakValue;
 
 	publishForceRawValue();
+	updatePeakForce();
 	calculateTestSpeed();
 
 	displayValue = getMainDisplayValue();
@@ -953,6 +994,8 @@ void updateMainNumbers() {
 		displaySetText(PEAK_VALUE_LABEL, "--");
 	}
 	ftoa(testSpeedValue, buffer, 1);
+	strcat(buffer, getDisplayUnitStr());
+	strcat(buffer, "/s");
 	displaySetText(TEST_SPEED_LABEL, buffer);
 }
 

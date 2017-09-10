@@ -92,6 +92,8 @@ void processChangeDisplayUnitType(const unsigned char *displayCommandBuffer);
 void processChangeOverflowProtectionMode(const unsigned char *displayCommandBuffer);
 void processChangeOverflowProtectionPercentage(const unsigned char *displayCommandBuffer);
 void processToggleOverflowProtection(const unsigned char *displayCommandBuffer);
+void processZeroCommand(const unsigned char *displayCommandBuffer);
+void processClearPeakCommand(const unsigned char *displayCommandBuffer);
 
 void sortCalibrationPoints();
 void fitStraighLine();
@@ -122,10 +124,11 @@ float getAdjustedTensionValue(long lastAdData, unsigned char calibrationUnit, fl
 float convertForceValue(float v, unsigned char fromForceUnit, unsigned char toForceUnit);
 float getForceConversionFactor(unsigned char fromForceUnit, unsigned char toForceUnit);
 float convertTensionValue(float v, unsigned char fromTensionUnit, unsigned char toTensionUnit);
+float convertForceToTension(float forceValue, unsigned char forceUnit, float sampleArea, unsigned char tensionUnit);
 float getTensionConversionFactor(unsigned char fromTensionUnit, unsigned char toTensionUnit);
-void processZeroCommand(const unsigned char *displayCommandBuffer);
 
 float getMainDisplayValue();
+const unsigned char* getDisplayUnitStr();
 
 void initiliazeTimerTicker();
 void startTimerTicker();
