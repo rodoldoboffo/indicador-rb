@@ -13,6 +13,7 @@
 #include <avr/io.h>
 #include <util/delay.h>
 #include <avr/interrupt.h>
+#include <time.h>
 
 volatile unsigned char update = 0;
 volatile unsigned char readChar = 0;
@@ -118,6 +119,20 @@ void softwareSerialPrintFloat(const float f, unsigned char decimalPlaces) {
 	unsigned char output[16];
 	ftoa(f, output, decimalPlaces);
 	return softwareSerialPrint(output);
+}
+
+void softwareSerialPrintTm(const struct tm *t) {
+	softwareSerialPrintULong(t->tm_year);
+	softwareSerialPrint("-");
+	softwareSerialPrintULong(t->tm_mon);
+	softwareSerialPrint("-");
+	softwareSerialPrintULong(t->tm_mday);
+	softwareSerialPrint(" ");
+	softwareSerialPrintULong(t->tm_hour);
+	softwareSerialPrint(":");
+	softwareSerialPrintULong(t->tm_min);
+	softwareSerialPrint(":");
+	softwareSerialPrintULong(t->tm_sec);
 }
 
 void softwareSendByte(unsigned char c) {

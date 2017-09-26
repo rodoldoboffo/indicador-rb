@@ -6,10 +6,10 @@
  */ 
 
 
+
 #ifndef SOFTWARE_UART_H_
 #define SOFTWARE_UART_H_
-
-
+#include <time.h>
 void softwareSendByte(unsigned char c);
 void softwareSendBit(unsigned char b);
 void softwareSerialPrint(const unsigned char *c);
@@ -19,5 +19,6 @@ void softwareSerialPrintFloat(const float f, unsigned char decimalPlaces);
 void softwareSerialPrintLong(const long l);
 void initSoftwareUARTSend();
 void initSoftwareUARTReceive();
+void softwareSerialPrintTm(const struct tm *t);
 
 #endif /* SOFTWARE_UART_H_ */

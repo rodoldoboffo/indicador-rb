@@ -139,6 +139,12 @@
     <Compile Include="ads1231.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="ds3231.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ds3231.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="least_square.c">
       <SubType>compile</SubType>
     </Compile>

@@ -7,8 +7,6 @@
 
 #include "indicator.h"
 #include "nx4832t035.h"
-#include "least_square.h"
-#include "software_uart.h"
 #include <util/delay.h>
 
 int main(void)
@@ -20,7 +18,7 @@ int main(void)
 		if (currentPage == MAIN_PAGE) {
 			updateMainNumbers();
 			if (overflowProtectionEnabled)
-				checkMachineOverflow();
+			checkMachineOverflow();
 			_delay_ms(50);
 		}
 		if (currentPage == NEW_POINT_PAGE) {

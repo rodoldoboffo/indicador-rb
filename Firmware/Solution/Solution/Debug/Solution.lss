@@ -13,21 +13,21 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00005300  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 00000648  00000000  00000000  00005340  2**3
+  5 .debug_aranges 00000650  00000000  00000000  00005340  2**3
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00007f38  00000000  00000000  00005988  2**0
+  6 .debug_info   000080e9  00000000  00000000  00005990  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00001b11  00000000  00000000  0000d8c0  2**0
+  7 .debug_abbrev 00001b2f  00000000  00000000  0000da79  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   000032f4  00000000  00000000  0000f3d1  2**0
+  8 .debug_line   00003357  00000000  00000000  0000f5a8  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00001340  00000000  00000000  000126c8  2**2
+  9 .debug_frame  0000135c  00000000  00000000  00012900  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00001c24  00000000  00000000  00013a08  2**0
+ 10 .debug_str    00001c80  00000000  00000000  00013c5c  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    000058b7  00000000  00000000  0001562c  2**0
+ 11 .debug_loc    0000591c  00000000  00000000  000158dc  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 000004c8  00000000  00000000  0001aee3  2**0
+ 12 .debug_ranges 000004d0  00000000  00000000  0001b1f8  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -2165,7 +2165,7 @@ long int adcFetchData() {
      f30:	08 95       	ret
 
 00000f32 <main>:
-#include "software_uart.h"
+#include "nx4832t035.h"
 #include <util/delay.h>
 
 int main(void)
@@ -2185,7 +2185,7 @@ int main(void)
 			if (overflowProtectionEnabled)
      f46:	80 91 59 04 	lds	r24, 0x0459	; 0x800459 <overflowProtectionEnabled>
      f4a:	81 11       	cpse	r24, r1
-				checkMachineOverflow();
+			checkMachineOverflow();
      f4c:	0e 94 7e 11 	call	0x22fc	; 0x22fc <checkMachineOverflow>
 	#else
 		//round up by default
@@ -7873,9 +7873,9 @@ void softwareSendBit(unsigned char b) {
     39e6:	08 95       	ret
 
 000039e8 <softwareSendByte>:
-	unsigned char output[16];
-	ftoa(f, output, decimalPlaces);
-	return softwareSerialPrint(output);
+	softwareSerialPrintULong(t->tm_min);
+	softwareSerialPrint(":");
+	softwareSerialPrintULong(t->tm_sec);
 }
 
 void softwareSendByte(unsigned char c) {

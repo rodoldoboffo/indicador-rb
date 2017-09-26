@@ -38,6 +38,7 @@ SUBDIRS :=
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
 ../ads1231.c \
+../ds3231.c \
 ../least_square.c \
 ../main.c \
 ../myeeprom.c \
@@ -59,6 +60,7 @@ ASM_SRCS +=
 
 OBJS +=  \
 ads1231.o \
+ds3231.o \
 least_square.o \
 main.o \
 myeeprom.o \
@@ -73,6 +75,7 @@ ssr.o
 
 OBJS_AS_ARGS +=  \
 ads1231.o \
+ds3231.o \
 least_square.o \
 main.o \
 myeeprom.o \
@@ -87,6 +90,7 @@ ssr.o
 
 C_DEPS +=  \
 ads1231.d \
+ds3231.d \
 least_square.d \
 main.d \
 myeeprom.d \
@@ -101,6 +105,7 @@ ssr.d
 
 C_DEPS_AS_ARGS +=  \
 ads1231.d \
+ds3231.d \
 least_square.d \
 main.d \
 myeeprom.d \
@@ -127,6 +132,8 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
 
 
 
