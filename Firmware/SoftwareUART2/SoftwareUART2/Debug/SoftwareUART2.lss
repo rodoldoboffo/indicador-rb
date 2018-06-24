@@ -1,0 +1,776 @@
+
+SoftwareUART2.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         0000001c  00800100  000003ec  00000480  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         000003ec  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          00000022  0080011c  0080011c  0000049c  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  0000049c  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000004cc  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 00000140  00000000  00000000  0000050c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   00001a9c  00000000  00000000  0000064c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 00000c53  00000000  00000000  000020e8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   00000b6d  00000000  00000000  00002d3b  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  00000334  00000000  00000000  000038a8  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    00000703  00000000  00000000  00003bdc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    00000cb2  00000000  00000000  000042df  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000100  00000000  00000000  00004f91  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+   8:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+   c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  10:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  14:	0c 94 f4 00 	jmp	0x1e8	; 0x1e8 <__vector_5>
+  18:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  1c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  20:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  24:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  28:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  2c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  30:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  34:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  38:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  3c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  40:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  44:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  48:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  4c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  50:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  54:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  58:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  5c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  60:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  64:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_copy_data>:
+  74:	11 e0       	ldi	r17, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	ec ee       	ldi	r30, 0xEC	; 236
+  7c:	f3 e0       	ldi	r31, 0x03	; 3
+  7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
+  80:	05 90       	lpm	r0, Z+
+  82:	0d 92       	st	X+, r0
+  84:	ac 31       	cpi	r26, 0x1C	; 28
+  86:	b1 07       	cpc	r27, r17
+  88:	d9 f7       	brne	.-10     	; 0x80 <__do_copy_data+0xc>
+
+0000008a <__do_clear_bss>:
+  8a:	21 e0       	ldi	r18, 0x01	; 1
+  8c:	ac e1       	ldi	r26, 0x1C	; 28
+  8e:	b1 e0       	ldi	r27, 0x01	; 1
+  90:	01 c0       	rjmp	.+2      	; 0x94 <.do_clear_bss_start>
+
+00000092 <.do_clear_bss_loop>:
+  92:	1d 92       	st	X+, r1
+
+00000094 <.do_clear_bss_start>:
+  94:	ae 33       	cpi	r26, 0x3E	; 62
+  96:	b2 07       	cpc	r27, r18
+  98:	e1 f7       	brne	.-8      	; 0x92 <.do_clear_bss_loop>
+  9a:	0e 94 5e 00 	call	0xbc	; 0xbc <main>
+  9e:	0c 94 f4 01 	jmp	0x3e8	; 0x3e8 <_exit>
+
+000000a2 <__bad_interrupt>:
+  a2:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+000000a6 <adcInitialize>:
+#include "ads1231.h"
+#include <avr/io.h>
+#include <util/delay.h>
+
+void adcInitialize(unsigned char speed) {
+	DDRC |= (1<<ADC_SPEED_PIN) | (1<<ADC_PDWN_PIN) | (1<<ADC_SCLK_PIN);
+  a6:	97 b1       	in	r25, 0x07	; 7
+  a8:	97 60       	ori	r25, 0x07	; 7
+  aa:	97 b9       	out	0x07, r25	; 7
+	DDRC &= ~(1<<ADC_DOUT_PIN);
+  ac:	3b 98       	cbi	0x07, 3	; 7
+	PORTC |= (1<<ADC_DOUT_PIN) | (1<<ADC_PDWN_PIN);
+  ae:	98 b1       	in	r25, 0x08	; 8
+  b0:	9a 60       	ori	r25, 0x0A	; 10
+  b2:	98 b9       	out	0x08, r25	; 8
+	PORTC &= ~(1<<ADC_SCLK_PIN);
+  b4:	42 98       	cbi	0x08, 2	; 8
+	if (speed)
+  b6:	81 11       	cpse	r24, r1
+		PORTC |= (1<<ADC_SPEED_PIN);
+  b8:	40 9a       	sbi	0x08, 0	; 8
+  ba:	08 95       	ret
+
+000000bc <main>:
+#include <util/delay.h>
+
+int main(void)
+{
+	long int adData = 0;
+	initBleUARTSend();
+  bc:	0e 94 57 01 	call	0x2ae	; 0x2ae <initBleUARTSend>
+	initBleUARTReceive();
+  c0:	0e 94 64 01 	call	0x2c8	; 0x2c8 <initBleUARTReceive>
+	resetBleBuffer();
+  c4:	0e 94 7d 01 	call	0x2fa	; 0x2fa <resetBleBuffer>
+	adcInitialize(0);
+  c8:	80 e0       	ldi	r24, 0x00	; 0
+  ca:	0e 94 53 00 	call	0xa6	; 0xa6 <adcInitialize>
+	initSoftwareUARTSend();
+  ce:	0e 94 7d 00 	call	0xfa	; 0xfa <initSoftwareUARTSend>
+	initSoftwareUARTReceive();
+  d2:	0e 94 97 00 	call	0x12e	; 0x12e <initSoftwareUARTReceive>
+		//resetBleBuffer();
+		//softwareSerialPrintBuffer();
+		//resetSoftwareSerialBuffer();
+		//adData = adcFetchData();
+		//bleSerialPrintLong(adData);
+		softwareSerialPrint("Teste UART\n");
+  d6:	80 e0       	ldi	r24, 0x00	; 0
+  d8:	91 e0       	ldi	r25, 0x01	; 1
+  da:	0e 94 de 00 	call	0x1bc	; 0x1bc <softwareSerialPrint>
+		bleSerialPrint("Teste BLE UART\n");
+  de:	8c e0       	ldi	r24, 0x0C	; 12
+  e0:	91 e0       	ldi	r25, 0x01	; 1
+  e2:	0e 94 b6 01 	call	0x36c	; 0x36c <bleSerialPrint>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  e6:	2f ef       	ldi	r18, 0xFF	; 255
+  e8:	8f eb       	ldi	r24, 0xBF	; 191
+  ea:	96 e0       	ldi	r25, 0x06	; 6
+  ec:	21 50       	subi	r18, 0x01	; 1
+  ee:	80 40       	sbci	r24, 0x00	; 0
+  f0:	90 40       	sbci	r25, 0x00	; 0
+  f2:	e1 f7       	brne	.-8      	; 0xec <main+0x30>
+  f4:	00 c0       	rjmp	.+0      	; 0xf6 <main+0x3a>
+  f6:	00 00       	nop
+  f8:	ee cf       	rjmp	.-36     	; 0xd6 <main+0x1a>
+
+000000fa <initSoftwareUARTSend>:
+		////testSoftwareUARTSend();
+	//}
+//}
+
+void initSoftwareUARTSend() {
+	DDRD |= (1<<PORTD3);
+  fa:	53 9a       	sbi	0x0a, 3	; 10
+	TCCR1B |= (1 << WGM12);
+  fc:	e1 e8       	ldi	r30, 0x81	; 129
+  fe:	f0 e0       	ldi	r31, 0x00	; 0
+ 100:	80 81       	ld	r24, Z
+ 102:	88 60       	ori	r24, 0x08	; 8
+ 104:	80 83       	st	Z, r24
+	OCR1A = 1152;
+ 106:	80 e8       	ldi	r24, 0x80	; 128
+ 108:	94 e0       	ldi	r25, 0x04	; 4
+ 10a:	90 93 89 00 	sts	0x0089, r25	; 0x800089 <__TEXT_REGION_LENGTH__+0x7e0089>
+ 10e:	80 93 88 00 	sts	0x0088, r24	; 0x800088 <__TEXT_REGION_LENGTH__+0x7e0088>
+ 112:	08 95       	ret
+
+00000114 <resetSoftwareSerialBuffer>:
+	PCMSK2 |= (1 << PCINT18);
+	sei();
+}
+
+void resetSoftwareSerialBuffer() {
+	for (int i = 0; i < SOFTWARE_SERIAL_BUFFER_SIZE; i++) softwareSerialBuffer[i] = 0;
+ 114:	80 e0       	ldi	r24, 0x00	; 0
+ 116:	90 e0       	ldi	r25, 0x00	; 0
+ 118:	fc 01       	movw	r30, r24
+ 11a:	e2 5e       	subi	r30, 0xE2	; 226
+ 11c:	fe 4f       	sbci	r31, 0xFE	; 254
+ 11e:	10 82       	st	Z, r1
+ 120:	01 96       	adiw	r24, 0x01	; 1
+ 122:	80 31       	cpi	r24, 0x10	; 16
+ 124:	91 05       	cpc	r25, r1
+ 126:	c1 f7       	brne	.-16     	; 0x118 <resetSoftwareSerialBuffer+0x4>
+	softwareSerialBufferLen = 0;
+ 128:	10 92 1c 01 	sts	0x011C, r1	; 0x80011c <__data_end>
+ 12c:	08 95       	ret
+
+0000012e <initSoftwareUARTReceive>:
+	TCCR1B |= (1 << WGM12);
+	OCR1A = 1152;
+}
+
+void initSoftwareUARTReceive() {
+	resetSoftwareSerialBuffer();
+ 12e:	0e 94 8a 00 	call	0x114	; 0x114 <resetSoftwareSerialBuffer>
+	DDRD &= ~(1<<PORTD2);
+ 132:	52 98       	cbi	0x0a, 2	; 10
+	PORTD |= (1<<PORTD2);
+ 134:	5a 9a       	sbi	0x0b, 2	; 11
+	TCCR1B |= (1 << WGM12);
+ 136:	e1 e8       	ldi	r30, 0x81	; 129
+ 138:	f0 e0       	ldi	r31, 0x00	; 0
+ 13a:	80 81       	ld	r24, Z
+ 13c:	88 60       	ori	r24, 0x08	; 8
+ 13e:	80 83       	st	Z, r24
+	OCR1A = 1152;
+ 140:	80 e8       	ldi	r24, 0x80	; 128
+ 142:	94 e0       	ldi	r25, 0x04	; 4
+ 144:	90 93 89 00 	sts	0x0089, r25	; 0x800089 <__TEXT_REGION_LENGTH__+0x7e0089>
+ 148:	80 93 88 00 	sts	0x0088, r24	; 0x800088 <__TEXT_REGION_LENGTH__+0x7e0088>
+	PCICR |= (1 << PCIE2);
+ 14c:	e8 e6       	ldi	r30, 0x68	; 104
+ 14e:	f0 e0       	ldi	r31, 0x00	; 0
+ 150:	80 81       	ld	r24, Z
+ 152:	84 60       	ori	r24, 0x04	; 4
+ 154:	80 83       	st	Z, r24
+	PCMSK2 |= (1 << PCINT18);
+ 156:	ed e6       	ldi	r30, 0x6D	; 109
+ 158:	f0 e0       	ldi	r31, 0x00	; 0
+ 15a:	80 81       	ld	r24, Z
+ 15c:	84 60       	ori	r24, 0x04	; 4
+ 15e:	80 83       	st	Z, r24
+	sei();
+ 160:	78 94       	sei
+ 162:	08 95       	ret
+
+00000164 <softwareSendBit>:
+	}
+	softwareSendBit(1);
+}
+
+void softwareSendBit(unsigned char b) {
+	TCCR1B &= ~(1 << CS10);
+ 164:	e1 e8       	ldi	r30, 0x81	; 129
+ 166:	f0 e0       	ldi	r31, 0x00	; 0
+ 168:	90 81       	ld	r25, Z
+ 16a:	9e 7f       	andi	r25, 0xFE	; 254
+ 16c:	90 83       	st	Z, r25
+	if (b)
+ 16e:	88 23       	and	r24, r24
+ 170:	11 f0       	breq	.+4      	; 0x176 <softwareSendBit+0x12>
+		PORTD = PORTD | (1 << PORTD3);
+ 172:	5b 9a       	sbi	0x0b, 3	; 11
+ 174:	01 c0       	rjmp	.+2      	; 0x178 <softwareSendBit+0x14>
+	else
+		PORTD = PORTD & ~(1 << PORTD3);
+ 176:	5b 98       	cbi	0x0b, 3	; 11
+	TCCR1B |= (1 << CS10);
+ 178:	e1 e8       	ldi	r30, 0x81	; 129
+ 17a:	f0 e0       	ldi	r31, 0x00	; 0
+ 17c:	80 81       	ld	r24, Z
+ 17e:	81 60       	ori	r24, 0x01	; 1
+ 180:	80 83       	st	Z, r24
+	while (!(TIFR1 & (1 << OCF1A)));
+ 182:	b1 9b       	sbis	0x16, 1	; 22
+ 184:	fe cf       	rjmp	.-4      	; 0x182 <softwareSendBit+0x1e>
+	TIFR1 = (TIFR1 | (1 << OCF1A));
+ 186:	b1 9a       	sbi	0x16, 1	; 22
+	TCCR1B &= ~(1 << CS10);
+ 188:	e1 e8       	ldi	r30, 0x81	; 129
+ 18a:	f0 e0       	ldi	r31, 0x00	; 0
+ 18c:	80 81       	ld	r24, Z
+ 18e:	8e 7f       	andi	r24, 0xFE	; 254
+ 190:	80 83       	st	Z, r24
+ 192:	08 95       	ret
+
+00000194 <softwareSendByte>:
+	softwareSerialPrintULong(t->tm_min);
+	softwareSerialPrint(":");
+	softwareSerialPrintULong(t->tm_sec);
+}
+
+void softwareSendByte(unsigned char c) {
+ 194:	cf 93       	push	r28
+ 196:	df 93       	push	r29
+ 198:	d8 2f       	mov	r29, r24
+	unsigned char i;
+	softwareSendBit(0);
+ 19a:	80 e0       	ldi	r24, 0x00	; 0
+ 19c:	0e 94 b2 00 	call	0x164	; 0x164 <softwareSendBit>
+ 1a0:	c8 e0       	ldi	r28, 0x08	; 8
+	for (i = 0; i < 8; i++) {
+		softwareSendBit(c & 0x01);
+ 1a2:	8d 2f       	mov	r24, r29
+ 1a4:	81 70       	andi	r24, 0x01	; 1
+ 1a6:	0e 94 b2 00 	call	0x164	; 0x164 <softwareSendBit>
+		c >>= 1;
+ 1aa:	d6 95       	lsr	r29
+ 1ac:	c1 50       	subi	r28, 0x01	; 1
+}
+
+void softwareSendByte(unsigned char c) {
+	unsigned char i;
+	softwareSendBit(0);
+	for (i = 0; i < 8; i++) {
+ 1ae:	c9 f7       	brne	.-14     	; 0x1a2 <softwareSendByte+0xe>
+		softwareSendBit(c & 0x01);
+		c >>= 1;
+	}
+	softwareSendBit(1);
+ 1b0:	81 e0       	ldi	r24, 0x01	; 1
+ 1b2:	0e 94 b2 00 	call	0x164	; 0x164 <softwareSendBit>
+}
+ 1b6:	df 91       	pop	r29
+ 1b8:	cf 91       	pop	r28
+ 1ba:	08 95       	ret
+
+000001bc <softwareSerialPrint>:
+void resetSoftwareSerialBuffer() {
+	for (int i = 0; i < SOFTWARE_SERIAL_BUFFER_SIZE; i++) softwareSerialBuffer[i] = 0;
+	softwareSerialBufferLen = 0;
+}
+
+void softwareSerialPrint(const unsigned char *c) {
+ 1bc:	0f 93       	push	r16
+ 1be:	1f 93       	push	r17
+ 1c0:	cf 93       	push	r28
+ 1c2:	fc 01       	movw	r30, r24
+	unsigned char i;
+	for (i=0; c[i] != 0; i++) {
+ 1c4:	80 81       	ld	r24, Z
+ 1c6:	88 23       	and	r24, r24
+ 1c8:	59 f0       	breq	.+22     	; 0x1e0 <softwareSerialPrint+0x24>
+ 1ca:	8f 01       	movw	r16, r30
+ 1cc:	c0 e0       	ldi	r28, 0x00	; 0
+		softwareSendByte(c[i]);
+ 1ce:	0e 94 ca 00 	call	0x194	; 0x194 <softwareSendByte>
+	softwareSerialBufferLen = 0;
+}
+
+void softwareSerialPrint(const unsigned char *c) {
+	unsigned char i;
+	for (i=0; c[i] != 0; i++) {
+ 1d2:	cf 5f       	subi	r28, 0xFF	; 255
+ 1d4:	f8 01       	movw	r30, r16
+ 1d6:	ec 0f       	add	r30, r28
+ 1d8:	f1 1d       	adc	r31, r1
+ 1da:	80 81       	ld	r24, Z
+ 1dc:	81 11       	cpse	r24, r1
+ 1de:	f7 cf       	rjmp	.-18     	; 0x1ce <softwareSerialPrint+0x12>
+		softwareSendByte(c[i]);
+	}
+}
+ 1e0:	cf 91       	pop	r28
+ 1e2:	1f 91       	pop	r17
+ 1e4:	0f 91       	pop	r16
+ 1e6:	08 95       	ret
+
+000001e8 <__vector_5>:
+		//bleBufferLen = (bleBufferLen+1+BLE_BUFFER_SIZE-1) % (BLE_BUFFER_SIZE-1);
+	//}
+	//PCMSK2 |= (1 << PCINT23);
+//}
+
+ISR(PCINT2_vect) {
+ 1e8:	1f 92       	push	r1
+ 1ea:	0f 92       	push	r0
+ 1ec:	0f b6       	in	r0, 0x3f	; 63
+ 1ee:	0f 92       	push	r0
+ 1f0:	11 24       	eor	r1, r1
+ 1f2:	2f 93       	push	r18
+ 1f4:	5f 93       	push	r21
+ 1f6:	6f 93       	push	r22
+ 1f8:	7f 93       	push	r23
+ 1fa:	8f 93       	push	r24
+ 1fc:	9f 93       	push	r25
+ 1fe:	af 93       	push	r26
+ 200:	bf 93       	push	r27
+ 202:	ef 93       	push	r30
+ 204:	ff 93       	push	r31
+	unsigned char i, readChar=0;
+	PCMSK2 &= ~(1 << PCINT23);
+ 206:	ed e6       	ldi	r30, 0x6D	; 109
+ 208:	f0 e0       	ldi	r31, 0x00	; 0
+ 20a:	80 81       	ld	r24, Z
+ 20c:	8f 77       	andi	r24, 0x7F	; 127
+ 20e:	80 83       	st	Z, r24
+	if (!(PIND & (1<<PORTD7))) {
+ 210:	4f 99       	sbic	0x09, 7	; 9
+ 212:	39 c0       	rjmp	.+114    	; 0x286 <__vector_5+0x9e>
+		OCR1A = 576;
+ 214:	80 e4       	ldi	r24, 0x40	; 64
+ 216:	92 e0       	ldi	r25, 0x02	; 2
+ 218:	90 93 89 00 	sts	0x0089, r25	; 0x800089 <__TEXT_REGION_LENGTH__+0x7e0089>
+ 21c:	80 93 88 00 	sts	0x0088, r24	; 0x800088 <__TEXT_REGION_LENGTH__+0x7e0088>
+		TCCR1B |= (1 << CS10);
+ 220:	e1 e8       	ldi	r30, 0x81	; 129
+ 222:	f0 e0       	ldi	r31, 0x00	; 0
+ 224:	80 81       	ld	r24, Z
+ 226:	81 60       	ori	r24, 0x01	; 1
+ 228:	80 83       	st	Z, r24
+		while (!(TIFR1 & (1 << OCF1A)));
+ 22a:	b1 9b       	sbis	0x16, 1	; 22
+ 22c:	fe cf       	rjmp	.-4      	; 0x22a <__vector_5+0x42>
+		TCCR1B &= ~(1 << CS10);
+ 22e:	e1 e8       	ldi	r30, 0x81	; 129
+ 230:	f0 e0       	ldi	r31, 0x00	; 0
+ 232:	80 81       	ld	r24, Z
+ 234:	8e 7f       	andi	r24, 0xFE	; 254
+ 236:	80 83       	st	Z, r24
+		TIFR1 = (TIFR1 | (1 << OCF1A));
+ 238:	b1 9a       	sbi	0x16, 1	; 22
+		OCR1A = 1152;
+ 23a:	80 e8       	ldi	r24, 0x80	; 128
+ 23c:	94 e0       	ldi	r25, 0x04	; 4
+ 23e:	90 93 89 00 	sts	0x0089, r25	; 0x800089 <__TEXT_REGION_LENGTH__+0x7e0089>
+ 242:	80 93 88 00 	sts	0x0088, r24	; 0x800088 <__TEXT_REGION_LENGTH__+0x7e0088>
+ 246:	98 e0       	ldi	r25, 0x08	; 8
+	//}
+	//PCMSK2 |= (1 << PCINT23);
+//}
+
+ISR(PCINT2_vect) {
+	unsigned char i, readChar=0;
+ 248:	20 e0       	ldi	r18, 0x00	; 0
+		while (!(TIFR1 & (1 << OCF1A)));
+		TCCR1B &= ~(1 << CS10);
+		TIFR1 = (TIFR1 | (1 << OCF1A));
+		OCR1A = 1152;
+		for (i=0; i<8; i++) {
+			readChar >>= 1;
+ 24a:	26 95       	lsr	r18
+			TCCR1B |= (1 << CS10);
+ 24c:	80 81       	ld	r24, Z
+ 24e:	81 60       	ori	r24, 0x01	; 1
+ 250:	80 83       	st	Z, r24
+			while (!(TIFR1 & (1 << OCF1A)));
+ 252:	b1 9b       	sbis	0x16, 1	; 22
+ 254:	fe cf       	rjmp	.-4      	; 0x252 <__vector_5+0x6a>
+			TCCR1B &= ~(1 << CS10);
+ 256:	80 81       	ld	r24, Z
+ 258:	8e 7f       	andi	r24, 0xFE	; 254
+ 25a:	80 83       	st	Z, r24
+			if (PIND & (1<<PORTD7)) readChar |= 0x80;
+ 25c:	4f 99       	sbic	0x09, 7	; 9
+ 25e:	20 68       	ori	r18, 0x80	; 128
+			TIFR1 = (TIFR1 | (1 << OCF1A));
+ 260:	b1 9a       	sbi	0x16, 1	; 22
+ 262:	91 50       	subi	r25, 0x01	; 1
+		TCCR1B |= (1 << CS10);
+		while (!(TIFR1 & (1 << OCF1A)));
+		TCCR1B &= ~(1 << CS10);
+		TIFR1 = (TIFR1 | (1 << OCF1A));
+		OCR1A = 1152;
+		for (i=0; i<8; i++) {
+ 264:	91 f7       	brne	.-28     	; 0x24a <__vector_5+0x62>
+			while (!(TIFR1 & (1 << OCF1A)));
+			TCCR1B &= ~(1 << CS10);
+			if (PIND & (1<<PORTD7)) readChar |= 0x80;
+			TIFR1 = (TIFR1 | (1 << OCF1A));
+		}
+		bleBuffer[bleBufferLen] = readChar;
+ 266:	e0 91 1d 01 	lds	r30, 0x011D	; 0x80011d <bleBufferLen>
+ 26a:	f0 e0       	ldi	r31, 0x00	; 0
+ 26c:	e2 5d       	subi	r30, 0xD2	; 210
+ 26e:	fe 4f       	sbci	r31, 0xFE	; 254
+ 270:	20 83       	st	Z, r18
+		bleBufferLen = (bleBufferLen+1+BLE_BUFFER_SIZE-1) % (BLE_BUFFER_SIZE-1);
+ 272:	80 91 1d 01 	lds	r24, 0x011D	; 0x80011d <bleBufferLen>
+ 276:	90 e0       	ldi	r25, 0x00	; 0
+ 278:	40 96       	adiw	r24, 0x10	; 16
+ 27a:	6f e0       	ldi	r22, 0x0F	; 15
+ 27c:	70 e0       	ldi	r23, 0x00	; 0
+ 27e:	0e 94 cc 01 	call	0x398	; 0x398 <__divmodhi4>
+ 282:	80 93 1d 01 	sts	0x011D, r24	; 0x80011d <bleBufferLen>
+	}
+	PCMSK2 |= (1 << PCINT23);
+ 286:	ed e6       	ldi	r30, 0x6D	; 109
+ 288:	f0 e0       	ldi	r31, 0x00	; 0
+ 28a:	80 81       	ld	r24, Z
+ 28c:	80 68       	ori	r24, 0x80	; 128
+ 28e:	80 83       	st	Z, r24
+}
+ 290:	ff 91       	pop	r31
+ 292:	ef 91       	pop	r30
+ 294:	bf 91       	pop	r27
+ 296:	af 91       	pop	r26
+ 298:	9f 91       	pop	r25
+ 29a:	8f 91       	pop	r24
+ 29c:	7f 91       	pop	r23
+ 29e:	6f 91       	pop	r22
+ 2a0:	5f 91       	pop	r21
+ 2a2:	2f 91       	pop	r18
+ 2a4:	0f 90       	pop	r0
+ 2a6:	0f be       	out	0x3f, r0	; 63
+ 2a8:	0f 90       	pop	r0
+ 2aa:	1f 90       	pop	r1
+ 2ac:	18 95       	reti
+
+000002ae <initBleUARTSend>:
+		////testSoftwareUARTSend();
+	//}
+//}
+
+void initBleUARTSend() {
+	DDRD |= (1<<PORTD6);
+ 2ae:	56 9a       	sbi	0x0a, 6	; 10
+	TCCR1B |= (1 << WGM12);
+ 2b0:	e1 e8       	ldi	r30, 0x81	; 129
+ 2b2:	f0 e0       	ldi	r31, 0x00	; 0
+ 2b4:	80 81       	ld	r24, Z
+ 2b6:	88 60       	ori	r24, 0x08	; 8
+ 2b8:	80 83       	st	Z, r24
+	OCR1A = 1152;
+ 2ba:	80 e8       	ldi	r24, 0x80	; 128
+ 2bc:	94 e0       	ldi	r25, 0x04	; 4
+ 2be:	90 93 89 00 	sts	0x0089, r25	; 0x800089 <__TEXT_REGION_LENGTH__+0x7e0089>
+ 2c2:	80 93 88 00 	sts	0x0088, r24	; 0x800088 <__TEXT_REGION_LENGTH__+0x7e0088>
+ 2c6:	08 95       	ret
+
+000002c8 <initBleUARTReceive>:
+	//PCMSK2 |= (1 << PCINT23);
+	//sei();
+//}
+
+void initBleUARTReceive() {
+	DDRD &= ~(1<<DDD7);
+ 2c8:	57 98       	cbi	0x0a, 7	; 10
+	PORTD &= ~(1<<PORTD7);
+ 2ca:	5f 98       	cbi	0x0b, 7	; 11
+	TCCR1B |= (1 << WGM12);
+ 2cc:	e1 e8       	ldi	r30, 0x81	; 129
+ 2ce:	f0 e0       	ldi	r31, 0x00	; 0
+ 2d0:	80 81       	ld	r24, Z
+ 2d2:	88 60       	ori	r24, 0x08	; 8
+ 2d4:	80 83       	st	Z, r24
+	OCR1A = 1152;
+ 2d6:	80 e8       	ldi	r24, 0x80	; 128
+ 2d8:	94 e0       	ldi	r25, 0x04	; 4
+ 2da:	90 93 89 00 	sts	0x0089, r25	; 0x800089 <__TEXT_REGION_LENGTH__+0x7e0089>
+ 2de:	80 93 88 00 	sts	0x0088, r24	; 0x800088 <__TEXT_REGION_LENGTH__+0x7e0088>
+	PCICR |= (1 << PCIE2);
+ 2e2:	e8 e6       	ldi	r30, 0x68	; 104
+ 2e4:	f0 e0       	ldi	r31, 0x00	; 0
+ 2e6:	80 81       	ld	r24, Z
+ 2e8:	84 60       	ori	r24, 0x04	; 4
+ 2ea:	80 83       	st	Z, r24
+	PCMSK2 |= (1 << PCINT23);
+ 2ec:	ed e6       	ldi	r30, 0x6D	; 109
+ 2ee:	f0 e0       	ldi	r31, 0x00	; 0
+ 2f0:	80 81       	ld	r24, Z
+ 2f2:	80 68       	ori	r24, 0x80	; 128
+ 2f4:	80 83       	st	Z, r24
+	sei();
+ 2f6:	78 94       	sei
+ 2f8:	08 95       	ret
+
+000002fa <resetBleBuffer>:
+}
+
+void resetBleBuffer() {
+	for (int i = 0; i < BLE_BUFFER_SIZE; i++) bleBuffer[i] = 0;
+ 2fa:	80 e0       	ldi	r24, 0x00	; 0
+ 2fc:	90 e0       	ldi	r25, 0x00	; 0
+ 2fe:	fc 01       	movw	r30, r24
+ 300:	e2 5d       	subi	r30, 0xD2	; 210
+ 302:	fe 4f       	sbci	r31, 0xFE	; 254
+ 304:	10 82       	st	Z, r1
+ 306:	01 96       	adiw	r24, 0x01	; 1
+ 308:	80 31       	cpi	r24, 0x10	; 16
+ 30a:	91 05       	cpc	r25, r1
+ 30c:	c1 f7       	brne	.-16     	; 0x2fe <resetBleBuffer+0x4>
+	bleBufferLen = 0;
+ 30e:	10 92 1d 01 	sts	0x011D, r1	; 0x80011d <bleBufferLen>
+ 312:	08 95       	ret
+
+00000314 <bleSendBit>:
+	}
+	bleSendBit(1);
+}
+
+void bleSendBit(unsigned char b) {
+	TCCR1B &= ~(1 << CS10);
+ 314:	e1 e8       	ldi	r30, 0x81	; 129
+ 316:	f0 e0       	ldi	r31, 0x00	; 0
+ 318:	90 81       	ld	r25, Z
+ 31a:	9e 7f       	andi	r25, 0xFE	; 254
+ 31c:	90 83       	st	Z, r25
+	if (b)
+ 31e:	88 23       	and	r24, r24
+ 320:	11 f0       	breq	.+4      	; 0x326 <bleSendBit+0x12>
+		PORTD = PORTD | (1 << PORTD6);
+ 322:	5e 9a       	sbi	0x0b, 6	; 11
+ 324:	01 c0       	rjmp	.+2      	; 0x328 <bleSendBit+0x14>
+	else
+		PORTD = PORTD & ~(1 << PORTD6);
+ 326:	5e 98       	cbi	0x0b, 6	; 11
+	TCCR1B |= (1 << CS10);
+ 328:	e1 e8       	ldi	r30, 0x81	; 129
+ 32a:	f0 e0       	ldi	r31, 0x00	; 0
+ 32c:	80 81       	ld	r24, Z
+ 32e:	81 60       	ori	r24, 0x01	; 1
+ 330:	80 83       	st	Z, r24
+	while (!(TIFR1 & (1 << OCF1A)));
+ 332:	b1 9b       	sbis	0x16, 1	; 22
+ 334:	fe cf       	rjmp	.-4      	; 0x332 <bleSendBit+0x1e>
+	TIFR1 = (TIFR1 | (1 << OCF1A));
+ 336:	b1 9a       	sbi	0x16, 1	; 22
+	TCCR1B &= ~(1 << CS10);
+ 338:	e1 e8       	ldi	r30, 0x81	; 129
+ 33a:	f0 e0       	ldi	r31, 0x00	; 0
+ 33c:	80 81       	ld	r24, Z
+ 33e:	8e 7f       	andi	r24, 0xFE	; 254
+ 340:	80 83       	st	Z, r24
+ 342:	08 95       	ret
+
+00000344 <bleSendByte>:
+	bleSerialPrintULong(t->tm_min);
+	bleSerialPrint(":");
+	bleSerialPrintULong(t->tm_sec);
+}
+
+void bleSendByte(unsigned char c) {
+ 344:	cf 93       	push	r28
+ 346:	df 93       	push	r29
+ 348:	d8 2f       	mov	r29, r24
+	unsigned char i;
+	bleSendBit(0);
+ 34a:	80 e0       	ldi	r24, 0x00	; 0
+ 34c:	0e 94 8a 01 	call	0x314	; 0x314 <bleSendBit>
+ 350:	c8 e0       	ldi	r28, 0x08	; 8
+	for (i = 0; i < 8; i++) {
+		bleSendBit(c & 0x01);
+ 352:	8d 2f       	mov	r24, r29
+ 354:	81 70       	andi	r24, 0x01	; 1
+ 356:	0e 94 8a 01 	call	0x314	; 0x314 <bleSendBit>
+		c >>= 1;
+ 35a:	d6 95       	lsr	r29
+ 35c:	c1 50       	subi	r28, 0x01	; 1
+}
+
+void bleSendByte(unsigned char c) {
+	unsigned char i;
+	bleSendBit(0);
+	for (i = 0; i < 8; i++) {
+ 35e:	c9 f7       	brne	.-14     	; 0x352 <bleSendByte+0xe>
+		bleSendBit(c & 0x01);
+		c >>= 1;
+	}
+	bleSendBit(1);
+ 360:	81 e0       	ldi	r24, 0x01	; 1
+ 362:	0e 94 8a 01 	call	0x314	; 0x314 <bleSendBit>
+}
+ 366:	df 91       	pop	r29
+ 368:	cf 91       	pop	r28
+ 36a:	08 95       	ret
+
+0000036c <bleSerialPrint>:
+void resetBleBuffer() {
+	for (int i = 0; i < BLE_BUFFER_SIZE; i++) bleBuffer[i] = 0;
+	bleBufferLen = 0;
+}
+
+void bleSerialPrint(const unsigned char *c) {
+ 36c:	0f 93       	push	r16
+ 36e:	1f 93       	push	r17
+ 370:	cf 93       	push	r28
+ 372:	fc 01       	movw	r30, r24
+	unsigned char i;
+	for (i=0; c[i] != 0; i++) {
+ 374:	80 81       	ld	r24, Z
+ 376:	88 23       	and	r24, r24
+ 378:	59 f0       	breq	.+22     	; 0x390 <bleSerialPrint+0x24>
+ 37a:	8f 01       	movw	r16, r30
+ 37c:	c0 e0       	ldi	r28, 0x00	; 0
+		bleSendByte(c[i]);
+ 37e:	0e 94 a2 01 	call	0x344	; 0x344 <bleSendByte>
+	bleBufferLen = 0;
+}
+
+void bleSerialPrint(const unsigned char *c) {
+	unsigned char i;
+	for (i=0; c[i] != 0; i++) {
+ 382:	cf 5f       	subi	r28, 0xFF	; 255
+ 384:	f8 01       	movw	r30, r16
+ 386:	ec 0f       	add	r30, r28
+ 388:	f1 1d       	adc	r31, r1
+ 38a:	80 81       	ld	r24, Z
+ 38c:	81 11       	cpse	r24, r1
+ 38e:	f7 cf       	rjmp	.-18     	; 0x37e <bleSerialPrint+0x12>
+		bleSendByte(c[i]);
+	}
+}
+ 390:	cf 91       	pop	r28
+ 392:	1f 91       	pop	r17
+ 394:	0f 91       	pop	r16
+ 396:	08 95       	ret
+
+00000398 <__divmodhi4>:
+ 398:	97 fb       	bst	r25, 7
+ 39a:	07 2e       	mov	r0, r23
+ 39c:	16 f4       	brtc	.+4      	; 0x3a2 <__divmodhi4+0xa>
+ 39e:	00 94       	com	r0
+ 3a0:	07 d0       	rcall	.+14     	; 0x3b0 <__divmodhi4_neg1>
+ 3a2:	77 fd       	sbrc	r23, 7
+ 3a4:	09 d0       	rcall	.+18     	; 0x3b8 <__divmodhi4_neg2>
+ 3a6:	0e 94 e0 01 	call	0x3c0	; 0x3c0 <__udivmodhi4>
+ 3aa:	07 fc       	sbrc	r0, 7
+ 3ac:	05 d0       	rcall	.+10     	; 0x3b8 <__divmodhi4_neg2>
+ 3ae:	3e f4       	brtc	.+14     	; 0x3be <__divmodhi4_exit>
+
+000003b0 <__divmodhi4_neg1>:
+ 3b0:	90 95       	com	r25
+ 3b2:	81 95       	neg	r24
+ 3b4:	9f 4f       	sbci	r25, 0xFF	; 255
+ 3b6:	08 95       	ret
+
+000003b8 <__divmodhi4_neg2>:
+ 3b8:	70 95       	com	r23
+ 3ba:	61 95       	neg	r22
+ 3bc:	7f 4f       	sbci	r23, 0xFF	; 255
+
+000003be <__divmodhi4_exit>:
+ 3be:	08 95       	ret
+
+000003c0 <__udivmodhi4>:
+ 3c0:	aa 1b       	sub	r26, r26
+ 3c2:	bb 1b       	sub	r27, r27
+ 3c4:	51 e1       	ldi	r21, 0x11	; 17
+ 3c6:	07 c0       	rjmp	.+14     	; 0x3d6 <__udivmodhi4_ep>
+
+000003c8 <__udivmodhi4_loop>:
+ 3c8:	aa 1f       	adc	r26, r26
+ 3ca:	bb 1f       	adc	r27, r27
+ 3cc:	a6 17       	cp	r26, r22
+ 3ce:	b7 07       	cpc	r27, r23
+ 3d0:	10 f0       	brcs	.+4      	; 0x3d6 <__udivmodhi4_ep>
+ 3d2:	a6 1b       	sub	r26, r22
+ 3d4:	b7 0b       	sbc	r27, r23
+
+000003d6 <__udivmodhi4_ep>:
+ 3d6:	88 1f       	adc	r24, r24
+ 3d8:	99 1f       	adc	r25, r25
+ 3da:	5a 95       	dec	r21
+ 3dc:	a9 f7       	brne	.-22     	; 0x3c8 <__udivmodhi4_loop>
+ 3de:	80 95       	com	r24
+ 3e0:	90 95       	com	r25
+ 3e2:	bc 01       	movw	r22, r24
+ 3e4:	cd 01       	movw	r24, r26
+ 3e6:	08 95       	ret
+
+000003e8 <_exit>:
+ 3e8:	f8 94       	cli
+
+000003ea <__stop_program>:
+ 3ea:	ff cf       	rjmp	.-2      	; 0x3ea <__stop_program>
