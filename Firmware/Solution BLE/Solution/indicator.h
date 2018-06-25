@@ -76,6 +76,7 @@ void initializeSystem();
 void loadStoredParameters();
 
 void processDisplayMessages();
+void processBLEMessages();
 void processSetDisplayUnit(const unsigned char *displayCommandBuffer);
 void processGoToPage(const unsigned char *displayCommandBuffer);
 void processSetPage(const unsigned char *displayCommandBuffer);

@@ -24,15 +24,3 @@
 	 }
 	 return 0;
  }
- 
-  int find(unsigned char c, unsigned char inputBuffer) {
-	  int i;
-	  unsigned char bufferLen = (inBufferEndIndex-inBufferStartIndex+INPUT_SERIAL_BUFFER_LEN)%INPUT_SERIAL_BUFFER_LEN;
-	  if (bufferLen > 0) {
-		  for (i=0U; i<bufferLen; i++) {
-			  if (inputBuffer[(inBufferStartIndex+i)%INPUT_SERIAL_BUFFER_LEN] == c)
-			  return i;
-		  }
-	  }
-	  return -1;
-  }

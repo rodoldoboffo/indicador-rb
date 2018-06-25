@@ -31,8 +31,9 @@ int main(void)
 			//updateNewPointDigitalValue();
 			//_delay_ms(10);
 		//}
-		softwareSerialPrint("Teste UART\n");
-		bleSerialPrint("Teste BLE UART\n");
+		//softwareSerialPrint("Teste UART\n");
+		blePrintBuffer();
+		bleSerialPrint("\n");
 		_delay_ms(200);
 	}
 }

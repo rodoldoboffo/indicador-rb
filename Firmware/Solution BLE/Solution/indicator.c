@@ -147,96 +147,11 @@ void stopTimerTicker() {
 }
 
 void processBLEMessages() {
-	unsigned char displayCommandBuffer[36];
-	while (serialFind(';') != -1) {
-		serialBufferReadUntil(';', displayCommandBuffer);
-		#ifdef DEBUG
-		softwareSerialPrint("Command Buffer:\n");
-		softwareSerialPrint(displayCommandBuffer);
-		softwareSerialPrint("\n");
-		#endif
-		if ((unsigned char *)strstr(displayCommandBuffer, UNIT_COMMAND) == displayCommandBuffer) {
+	unsigned char commandBuffer[36];
+	while (serialBleFind(';') != -1) {
+		bleBufferReadUntil(';', commandBuffer);
+		if ((unsigned char *)strstr(commandBuffer, "beep") == commandBuffer) {
 			playLowBuzz(BEEP_DURATION);
-			processSetDisplayUnit(displayCommandBuffer);
-		}
-		else if ((unsigned char *)strstr(displayCommandBuffer, GO_TO_COMMAND) == displayCommandBuffer) {
-			playLowBuzz(BEEP_DURATION);
-			processGoToPage(displayCommandBuffer);
-		}
-		else if ((unsigned char *)strstr(displayCommandBuffer, PAGE_COMMAND) == displayCommandBuffer) {
-			processSetPage(displayCommandBuffer);
-		}
-		else if ((unsigned char *)strstr(displayCommandBuffer, POINT_LOCKED_COMMAND) == displayCommandBuffer) {
-			playLowBuzz(BEEP_DURATION);
-			processPointLock(displayCommandBuffer);
-		}
-		else if ((unsigned char *)strstr(displayCommandBuffer, CONFIRM_NEW_POINT_COMMAND) == displayCommandBuffer) {
-			playLowBuzz(BEEP_DURATION);
-			processNewCalibrationPoint(displayCommandBuffer);
-		}
-		else if ((unsigned char *)strstr(displayCommandBuffer, CHANGE_CALIBRATION_POINT_COMMAND) == displayCommandBuffer) {
-			playLowBuzz(BEEP_DURATION);
-			processChangeCalPoint(displayCommandBuffer);
-		}
-		else if ((unsigned char *)strstr(displayCommandBuffer, CHANGE_CALIBRATION_UNIT_COMMAND) == displayCommandBuffer) {
-			playLowBuzz(BEEP_DURATION);
-			processChangeCalUnit(displayCommandBuffer);
-		}
-		else if ((unsigned char *)strstr(displayCommandBuffer, DELETE_CALIBRATION_POINT_COMMAND) == displayCommandBuffer) {
-			playLowBuzz(BEEP_DURATION);
-			processDeleteCalPoint(displayCommandBuffer);
-		}
-		else if ((unsigned char *)strstr(displayCommandBuffer, CHANGE_SAMPLE_COMMAND) == displayCommandBuffer) {
-			playLowBuzz(BEEP_DURATION);
-			processChangeSample(displayCommandBuffer);
-		}
-		else if ((unsigned char *)strstr(displayCommandBuffer, FLOAT_VAR_COMMAND) == displayCommandBuffer) {
-			playLowBuzz(BEEP_DURATION);
-			processFloatVar(displayCommandBuffer);
-		}
-		else if ((unsigned char *)strstr(displayCommandBuffer, FLOAT_VAL_COMMAND) == displayCommandBuffer) {
-			playLowBuzz(BEEP_DURATION);
-			processFloatVal(displayCommandBuffer);
-		}
-		else if ((unsigned char *)strstr(displayCommandBuffer, CHANGE_DISPLAY_UNIT_TYPE_COMMAND) == displayCommandBuffer) {
-			playLowBuzz(BEEP_DURATION);
-			processChangeDisplayUnitType(displayCommandBuffer);
-		}
-		else if ((unsigned char *)strstr(displayCommandBuffer, CHANGE_DISPLAY_UNIT_COMMAND) == displayCommandBuffer) {
-			playLowBuzz(BEEP_DURATION);
-			processChangeDisplayUnit(displayCommandBuffer);
-		}
-		else if ((unsigned char *)strstr(displayCommandBuffer, OVERFLOW_PROTECTION_MODE_COMMAND) == displayCommandBuffer) {
-			playLowBuzz(BEEP_DURATION);
-			processChangeOverflowProtectionMode(displayCommandBuffer);
-		}
-		else if ((unsigned char *)strstr(displayCommandBuffer, OVERFLOW_PROTECTION_PERCENTAGE_COMMAND) == displayCommandBuffer) {
-			playLowBuzz(BEEP_DURATION);
-			processChangeOverflowProtectionPercentage(displayCommandBuffer);
-		}
-		else if ((unsigned char *)strstr(displayCommandBuffer, TOGGLE_OVERFLOW_PROTECTION_COMMAND) == displayCommandBuffer) {
-			playLowBuzz(BEEP_DURATION);
-			processToggleOverflowProtection(displayCommandBuffer);
-		}
-		else if ((unsigned char *)strstr(displayCommandBuffer, ZERO_COMMAND) == displayCommandBuffer) {
-			playLowBuzz(BEEP_DURATION);
-			processZeroCommand(displayCommandBuffer);
-		}
-		else if ((unsigned char *)strstr(displayCommandBuffer, CLEAR_PEAK_COMMAND) == displayCommandBuffer) {
-			playLowBuzz(BEEP_DURATION);
-			processClearPeakCommand(displayCommandBuffer);
-		}
-		else if ((unsigned char *)strstr(displayCommandBuffer, CHANGE_HOUR_COMMAND) == displayCommandBuffer) {
-			playLowBuzz(BEEP_DURATION);
-			processChangeHourCommand(displayCommandBuffer);
-		}
-		else if ((unsigned char *)strstr(displayCommandBuffer, CHANGE_MINUTE_COMMAND) == displayCommandBuffer) {
-			playLowBuzz(BEEP_DURATION);
-			processChangeMinuteCommand(displayCommandBuffer);
-		}
-		else if ((unsigned char *)strstr(displayCommandBuffer, SET_CLOCK_COMMAND) == displayCommandBuffer) {
-			playLowBuzz(BEEP_DURATION);
-			processSetClockCommand(displayCommandBuffer);
 		}
 	}
 }

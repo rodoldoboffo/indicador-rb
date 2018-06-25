@@ -8,7 +8,7 @@
 
 #ifndef SOFTWARE_UART_BLE_H_
 #define SOFTWARE_UART_BLE_H_
-#define BLE_BUFFER_SIZE 16
+#define BLE_BUFFER_SIZE 24
 #include <time.h>
 
 void resetBleBuffer();
@@ -23,5 +23,11 @@ void bleSerialPrintLong(const long l);
 void initBleUARTSend();
 void initBleUARTReceive();
 void bleSerialPrintTm(const struct tm *t);
+void disableBleInterupt();
+void enableBleInterupt();
+void bleBufferRead(unsigned int numBytes, unsigned char *buffer);
+void bleBufferReadAll(unsigned char *buffer);
+int serialBleFind(unsigned char c);
+void bleBufferReadUntil(unsigned char stopChar, unsigned char *buffer);
 
 #endif /* SOFTWARE_UART_BLE_H_ */

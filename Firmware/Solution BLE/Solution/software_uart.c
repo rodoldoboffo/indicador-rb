@@ -18,6 +18,7 @@
 volatile unsigned char update = 0;
 volatile unsigned char readChar = 0;
 volatile unsigned char readBits = 0;
+
 //
 //ISR(PCINT2_vect) {
 	//cli();
