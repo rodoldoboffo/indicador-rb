@@ -20,6 +20,9 @@ int main(void)
 	while (1)
 	{
 		processBLEMessages();
+		if (sendADValue) {
+			bleSendADValue();
+		}
 		//if (currentPage == MAIN_PAGE) {
 			//updateMainNumbers();
 			//updateTemperature();
@@ -32,8 +35,11 @@ int main(void)
 			//_delay_ms(10);
 		//}
 		//softwareSerialPrint("Teste UART\n");
-		blePrintBuffer();
-		bleSerialPrint("\n");
-		_delay_ms(200);
+		//bleSerialPrint("AT+ADDR?");
+		//_delay_ms(1000);
+		//bleBufferReadAll(buffer);
+		//softwareSerialPrint(buffer);
+		//softwareSerialPrint("\n");
+		_delay_ms(100);
 	}
 }

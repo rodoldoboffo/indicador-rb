@@ -54,6 +54,7 @@ struct t_testSpeed {
 	unsigned int timeTick;
 };
 
+extern unsigned char sendADValue;
 extern unsigned char currentPage;
 extern unsigned char displayForceUnit;
 extern unsigned char displayTensionUnit;
@@ -77,6 +78,8 @@ void loadStoredParameters();
 
 void processDisplayMessages();
 void processBLEMessages();
+void bleSendADValue();
+
 void processSetDisplayUnit(const unsigned char *displayCommandBuffer);
 void processGoToPage(const unsigned char *displayCommandBuffer);
 void processSetPage(const unsigned char *displayCommandBuffer);

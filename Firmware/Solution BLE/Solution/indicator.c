@@ -63,6 +63,7 @@
 
  const unsigned char tensionUnitsString[][10] = {"MPa", "psi", "kgf/mm2", "N/mm2"};
 
+ unsigned char sendADValue = 0;
  unsigned char currentPage = WAIT_PAGE;
  unsigned char displayUnitType = FORCE_UNIT;
  unsigned char displayForceUnit = 0;
@@ -150,10 +151,20 @@ void processBLEMessages() {
 	unsigned char commandBuffer[36];
 	while (serialBleFind(';') != -1) {
 		bleBufferReadUntil(';', commandBuffer);
-		if ((unsigned char *)strstr(commandBuffer, "beep") == commandBuffer) {
-			playLowBuzz(BEEP_DURATION);
+		if ((unsigned char *)strstr(commandBuffer, "start") == commandBuffer) {
+			sendADValue = 1;
+		}
+		else if ((unsigned char *)strstr(commandBuffer, "stop") == commandBuffer) {
+			sendADValue = 0;
 		}
 	}
+}
+
+void bleSendADValue() {
+	long int adValue = adcFetchData();
+	bleSerialPrint("adval=");
+	bleSerialPrintLong(adValue);
+	bleSerialPrint(";");
 }
 
 void processDisplayMessages() {
