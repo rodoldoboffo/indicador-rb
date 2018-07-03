@@ -50,6 +50,7 @@
  const unsigned char CHANGE_HOUR_COMMAND[] = "hour=";
  const unsigned char CHANGE_MINUTE_COMMAND[] = "min=";
  const unsigned char SET_CLOCK_COMMAND[] = "clk=";
+ const unsigned char BLE_AD_VAL_COMMAND[] = "adval=";
  const unsigned char READY[] = "ready\n";
  
  const unsigned char forceUnitsString[][5] = {
@@ -152,9 +153,13 @@ void processBLEMessages() {
 	while (serialBleFind(';') != -1) {
 		bleBufferReadUntil(';', commandBuffer);
 		if ((unsigned char *)strstr(commandBuffer, "start") == commandBuffer) {
+			bleSerialPrint(";started;");
+			playLowBuzz(BEEP_DURATION);
 			sendADValue = 1;
 		}
 		else if ((unsigned char *)strstr(commandBuffer, "stop") == commandBuffer) {
+			bleSerialPrint(";stopped;");
+			playLowBuzz(BEEP_DURATION);
 			sendADValue = 0;
 		}
 	}
@@ -162,7 +167,7 @@ void processBLEMessages() {
 
 void bleSendADValue() {
 	long int adValue = adcFetchData();
-	bleSerialPrint("adval=");
+	bleSerialPrint(BLE_AD_VAL_COMMAND);
 	bleSerialPrintLong(adValue);
 	bleSerialPrint(";");
 }

@@ -40,6 +40,6 @@ int main(void)
 		//bleBufferReadAll(buffer);
 		//softwareSerialPrint(buffer);
 		//softwareSerialPrint("\n");
-		_delay_ms(100);
+		//_delay_ms(100);
 	}
 }
