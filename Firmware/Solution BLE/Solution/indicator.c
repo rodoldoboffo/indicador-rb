@@ -129,6 +129,7 @@ void initializeSystem() {
 	startTimerTicker();
 
 	softwareSerialPrint(READY);
+	bleSerialPrint(READY);
 }
 
 void initiliazeTimerTicker() {
@@ -152,15 +153,27 @@ void processBLEMessages() {
 	unsigned char commandBuffer[36];
 	while (serialBleFind(';') != -1) {
 		bleBufferReadUntil(';', commandBuffer);
-		if ((unsigned char *)strstr(commandBuffer, "start") == commandBuffer) {
-			bleSerialPrint(";started;");
-			playLowBuzz(BEEP_DURATION);
-			sendADValue = 1;
-		}
-		else if ((unsigned char *)strstr(commandBuffer, "stop") == commandBuffer) {
-			bleSerialPrint(";stopped;");
-			playLowBuzz(BEEP_DURATION);
+		//if ((unsigned char *)strstr(commandBuffer, "start") == commandBuffer) {
+			//bleSerialPrint(";started;");
+			//playLowBuzz(BEEP_DURATION);
+			//sendADValue = 1;
+		//}
+		//else if ((unsigned char *)strstr(commandBuffer, "stop") == commandBuffer) {
+			//bleSerialPrint(";stopped;");
+			//playLowBuzz(BEEP_DURATION);
+			//sendADValue = 0;
+		//}
+		if ((unsigned char *)strstr(commandBuffer, "getv") == commandBuffer) {
+			bleSendADValue();
 			sendADValue = 0;
+		}
+		else if ((unsigned char *)strstr(commandBuffer, "rly1") == commandBuffer) {
+			relayTurnOn();
+			bleSerialPrint(";rlyon;");
+		}
+		else if ((unsigned char *)strstr(commandBuffer, "rly0") == commandBuffer) {
+			relayTurnOff();
+			bleSerialPrint(";rlyoff;");
 		}
 	}
 }

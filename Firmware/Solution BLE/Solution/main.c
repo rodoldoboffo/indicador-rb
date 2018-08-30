@@ -20,9 +20,9 @@ int main(void)
 	while (1)
 	{
 		processBLEMessages();
-		if (sendADValue) {
-			bleSendADValue();
-		}
+		//if (sendADValue) {
+			//bleSendADValue();
+		//}
 		//if (currentPage == MAIN_PAGE) {
 			//updateMainNumbers();
 			//updateTemperature();
@@ -40,6 +40,6 @@ int main(void)
 		//bleBufferReadAll(buffer);
 		//softwareSerialPrint(buffer);
 		//softwareSerialPrint("\n");
-		//_delay_ms(100);
+		_delay_ms(10);
 	}
 }
