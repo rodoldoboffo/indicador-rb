@@ -1,0 +1,4 @@
+low fuse FF
+hihg fuse D9
+extended fuse FF
+lock fuse FF
