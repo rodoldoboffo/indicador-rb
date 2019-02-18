@@ -28,15 +28,15 @@
     <eraseonlaunchrule>0</eraseonlaunchrule>
     <AsfFrameworkConfig>
       <framework-data>
-  <options />
-  <configurations />
-  <files />
-  <documentation help="" />
-  <offline-documentation help="" />
-  <dependencies>
-    <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.34.1" />
-  </dependencies>
-</framework-data>
+        <options />
+        <configurations />
+        <files />
+        <documentation help="" />
+        <offline-documentation help="" />
+        <dependencies>
+          <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.34.1" />
+        </dependencies>
+      </framework-data>
     </AsfFrameworkConfig>
     <avrtool>com.atmel.avrdbg.tool.simulator</avrtool>
     <avrtoolserialnumber />
@@ -141,43 +141,7 @@
     <Compile Include="ads1231.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="ds3231.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="ds3231.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="least_square.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="least_square.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="main.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="myeeprom.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="myeeprom.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="mystdlib.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="mystdlib.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="mystring.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="mystring.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="nx4832t035.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="nx4832t035.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="indicator.c">
@@ -186,22 +150,10 @@
     <Compile Include="indicator.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="passive_buzer.c">
+    <Compile Include="mystdlib.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="passive_buzzer.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="serial.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="serial.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="software_uart.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="software_uart.h">
+    <Compile Include="mystdlib.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="software_uart_ble.c">
