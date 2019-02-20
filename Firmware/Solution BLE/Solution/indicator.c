@@ -9,8 +9,10 @@
 #include "indicator.h"
 #include "software_uart_ble.h"
 #include "ads1231.h"
+#include "ssr.h"
 
 #include <string.h>
+#include <util/delay.h>
 
 const unsigned char BLE_AD_VAL_COMMAND[] = "adval=";
 const unsigned char GET_VAL_COMMAND[] = "getv";
@@ -21,7 +23,7 @@ const unsigned char READY[] = "ready\n";
 void initializeSystem() {
 	initBleUARTSend();
 	initBleUARTReceive();
-	adcInitialize(0);
+	adcInitialize(1);
 	initializeRelay(0);
 	_delay_ms(800);
 	bleSerialPrint(READY);
