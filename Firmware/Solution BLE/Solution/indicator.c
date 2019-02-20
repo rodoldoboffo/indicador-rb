@@ -14,16 +14,16 @@
 
 const unsigned char BLE_AD_VAL_COMMAND[] = "adval=";
 const unsigned char GET_VAL_COMMAND[] = "getv";
+const unsigned char RELAY_ON_COMMAND[] = "rly1";
+const unsigned char RELAY_OFF_COMMAND[] = "rly0";
 const unsigned char READY[] = "ready\n";
 
 void initializeSystem() {
 	initBleUARTSend();
 	initBleUARTReceive();
 	adcInitialize(0);
-	
-	//initializeRelay(!overflowProtectionMode);
-	//_delay_ms(800);
-
+	initializeRelay(0);
+	_delay_ms(800);
 	bleSerialPrint(READY);
 }
 
@@ -34,14 +34,14 @@ void processBLEMessages() {
 		if ((unsigned char *)strstr(commandBuffer, GET_VAL_COMMAND) == commandBuffer) {
 			bleSendADValue();
 		}
-		//else if ((unsigned char *)strstr(commandBuffer, "rly1") == commandBuffer) {
-			//relayTurnOn();
-			//bleSerialPrint(";rlyon;");
-		//}
-		//else if ((unsigned char *)strstr(commandBuffer, "rly0") == commandBuffer) {
-			//relayTurnOff();
-			//bleSerialPrint(";rlyoff;");
-		//}
+		else if ((unsigned char *)strstr(commandBuffer, RELAY_ON_COMMAND) == commandBuffer) {
+			relayTurnOn();
+			bleSerialPrint(";rlyon;");
+		}
+		else if ((unsigned char *)strstr(commandBuffer, RELAY_OFF_COMMAND) == commandBuffer) {
+			relayTurnOff();
+			bleSerialPrint(";rlyoff;");
+		}
 	}
 }
 

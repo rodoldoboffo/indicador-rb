@@ -9,7 +9,7 @@
 #ifndef SSR_H_
 #define SSR_H_
 
-#define SSR_PIN PORTB0
+#define SSR_PIN PORTB1
 
 void initializeRelay(unsigned char onOff);
 void relayTurnOn();
