@@ -154,16 +154,20 @@ void resetBleBuffer() {
 
 void bleSerialPrint(const unsigned char *c) {
 	unsigned char i;
+	disableBleInterupt();
 	for (i=0; c[i] != 0; i++) {
 		bleSendByte(c[i]);
 	}
+	enableBleInterupt();
 }
 
 void blePrintBuffer() {
 	unsigned char i;
+	disableBleInterupt();
 	for (i=0; bleBuffer[i] != 0 && i < BLE_BUFFER_SIZE; i++) {
 		bleSendByte(bleBuffer[i]);
 	}
+	enableBleInterupt();
 }
 
 void bleSerialPrintInt(const int i) {
@@ -190,20 +194,6 @@ void bleSerialPrintFloat(const float f, unsigned char decimalPlaces) {
 	return bleSerialPrint(output);
 }
 
-void bleSerialPrintTm(const struct tm *t) {
-	bleSerialPrintULong(t->tm_year);
-	bleSerialPrint("-");
-	bleSerialPrintULong(t->tm_mon);
-	bleSerialPrint("-");
-	bleSerialPrintULong(t->tm_mday);
-	bleSerialPrint(" ");
-	bleSerialPrintULong(t->tm_hour);
-	bleSerialPrint(":");
-	bleSerialPrintULong(t->tm_min);
-	bleSerialPrint(":");
-	bleSerialPrintULong(t->tm_sec);
-}
-
 void bleSendByte(unsigned char c) {
 	unsigned char i;
 	bleSendBit(0);
@@ -215,7 +205,6 @@ void bleSendByte(unsigned char c) {
 }
 
 void bleSendBit(unsigned char b) {
-	disableBleInterupt();
 	TCCR1B &= ~(1 << CS10);
 	if (b)
 		PORTD = PORTD | (1 << PORTD6);
@@ -225,7 +214,6 @@ void bleSendBit(unsigned char b) {
 	while (!(TIFR1 & (1 << OCF1A)));
 	TIFR1 = (TIFR1 | (1 << OCF1A));
 	TCCR1B &= ~(1 << CS10);
-	enableBleInterupt();
 	return;
 }
 
