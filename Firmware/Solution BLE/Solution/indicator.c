@@ -45,6 +45,7 @@ void processBLEMessages() {
 			bleSerialPrint(";rlyoff;");
 		}
 	}
+	resetBleBuffer();
 }
 
 void bleSendADValue() {

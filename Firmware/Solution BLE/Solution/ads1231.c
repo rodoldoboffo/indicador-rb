@@ -38,10 +38,8 @@ long int adcFetchData() {
 		PORTC &= ~(1<<ADC_SCLK_PIN);
 		_delay_us(10);
 		if (temp & 0x800000) temp = temp | 0xFF000000;
-		if (temp != -1L) { // desconsidera o ponto -1. parece algum problema do AD. preciso investigar melhor.
-			d += temp;
-			j++;
-		}
+		d += temp;
+		j++;
 	}
 	d /= DIGITAL_FILTER;
 	return d;
