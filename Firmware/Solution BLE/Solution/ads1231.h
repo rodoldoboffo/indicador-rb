@@ -18,5 +18,7 @@
 
 void adcInitialize(unsigned char speed);
 long int adcFetchData();
+long int adcFetchNthData(unsigned char n);
+long int adcFetchFilteredData(unsigned char digitalFilter);
 
 #endif /* ADS1231_H_ */

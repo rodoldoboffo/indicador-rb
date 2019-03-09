@@ -49,7 +49,11 @@ void processBLEMessages() {
 }
 
 void bleSendADValue() {
-	long int adValue = adcFetchData();
+	unsigned char interruptState;
+	interruptState = atomicBlockBleBegin();
+	long int adValue = adcFetchFilteredData(1U);
+	atomicBlockBleEnd(interruptState);
+
 	bleSerialPrint(BLE_AD_VAL_COMMAND);
 	bleSerialPrintLong(adValue);
 	bleSerialPrint(";");
