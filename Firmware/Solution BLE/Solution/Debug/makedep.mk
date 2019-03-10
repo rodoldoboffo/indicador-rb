@@ -10,6 +10,8 @@ indicator.c
 
 mystdlib.c
 
+myutil.c
+
 software_uart_ble.c
 
 ssr.c
