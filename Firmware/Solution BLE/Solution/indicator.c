@@ -70,17 +70,19 @@ long int getADValue() {
 }
 
 void sendADValueToBle(long int adValue) {
+	bleSerialPrint(";");
 	bleSerialPrint(BLE_AD_VAL_COMMAND);
 	bleSerialPrintLong(adValue);
-	bleSerialPrint(";");
+	bleSerialPrint(";\n");
 }
 
 void sendStateToBle(long int adValue, unsigned char relay) {
 	unsigned char buffer[12];
+	bleSerialPrint(";");
 	bleSerialPrint(BLE_STATE_COMMAND);
 	convertToHex((unsigned char *)&adValue, sizeof(adValue), buffer);
 	bleSerialPrint(buffer);
 	convertToHex(&relay, sizeof(relay), buffer);
 	bleSerialPrint(buffer);
-	bleSerialPrint(";");
+	bleSerialPrint(";\n");
 }
