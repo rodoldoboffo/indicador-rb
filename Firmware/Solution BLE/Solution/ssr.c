@@ -29,3 +29,7 @@
  void relayTurnOff() {
 	PORTB &= ~(1<<SSR_PIN);
  }
+
+ unsigned char relayGetState() {
+	 return (PORTB & (1<<SSR_PIN)) ? 1 : 0;
+ }

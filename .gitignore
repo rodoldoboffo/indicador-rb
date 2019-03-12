@@ -1,3 +1,9 @@
-
-Firmware/Solution/Solution/Debug/
 *.o
+*.hex
+*.map
+*.srec
+*.lss
+*.elf
+*.d
+.atsuo
+Makefile

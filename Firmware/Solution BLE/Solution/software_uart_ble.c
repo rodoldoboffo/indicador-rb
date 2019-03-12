@@ -25,33 +25,22 @@
 volatile unsigned char bleBuffer[BLE_BUFFER_SIZE];
 volatile unsigned char bleInBufferStartIndex=0;
 volatile unsigned char bleInBufferEndIndex=0;
-//
-//ISR(PCINT2_vect) {
-	//unsigned char i, readChar=0, storedOCR0AValue = OCR0A;
-	//PCMSK2 &= ~(1 << PCINT23);
-	//if (!(PIND & (1<<PORTD7))) {
-		//OCR0A = OCR0A / 2;
-		//TCCR0B |= (1 << CS02);
-		//while (!(TIFR0 & (1 << OCF0A)));
-		//TCCR0B &= ~(1 << CS02);
-		//OCR0A = storedOCR0AValue;
-		//for (i=0; i<8; i++) {
-			//readChar >>= 1;
-			//TCCR0B |= (1 << CS02);
-			//while (!(TIFR0 & (1 << OCF0A)));
-			//TCCR0B &= ~(1 << CS02);
-			//if (PIND & (1<<PORTD7)) readChar |= 0x80;
-			//TIFR0 = (TIFR0 | (1 << OCF0A));
-		//}
-		//bleBuffer[bleBufferLen] = readChar;
-		//bleBufferLen = (bleBufferLen+1+BLE_BUFFER_SIZE-1) % (BLE_BUFFER_SIZE-1);
-	//}
-	//PCMSK2 |= (1 << PCINT23);
-//}
 
-ISR(PCINT2_vect) {
-	unsigned char i, readChar=0;
+unsigned char atomicBlockBleBegin() {
+	unsigned char currentState;
+	cli();
+	currentState = PCMSK2 & (1 << PCINT23);
 	disableBleInterupt();
+	return currentState;
+}
+
+void atomicBlockBleEnd(unsigned char currentState) {
+	if (currentState) enableBleInterupt();
+	sei();
+}
+
+void receiveBleByte() {
+	unsigned char i, readChar=0;
 	if (!(PIND & (1<<PORTD7))) {
 		OCR1A = 576;
 		TCCR1B |= (1 << CS10);
@@ -70,7 +59,13 @@ ISR(PCINT2_vect) {
 		bleBuffer[bleInBufferEndIndex] = readChar;
 		bleInBufferEndIndex = (bleInBufferEndIndex + 1)%BLE_BUFFER_SIZE;
 	}
-	enableBleInterupt();
+}
+
+ISR(PCINT2_vect) {
+	unsigned char interruptState;
+	interruptState = atomicBlockBleBegin();
+	receiveBleByte();
+	atomicBlockBleEnd(interruptState);
 }
 
 void disableBleInterupt() {
@@ -81,59 +76,11 @@ void enableBleInterupt() {
 	PCMSK2 |= (1 << PCINT23);
 }
 
-//ISR(PCINT2_vect) {
-	//if (!(PIND & (1<<PORTD2))) {
-		//readChar = 0;
-		//readBits = 0;
-		//TCCR1B |= (1 << CS10);
-	//}
-	//_delay_ms(1);
-//}
-//
-//ISR(TIMER1_COMPA_vect) {
-	//TIFR1 = (TIFR1 | (1 << OCF1A));
-	////readChar >>= 1;
-	////if (PIND & (1<<PORTD2))	readChar |= 0x80;
-	////if (++readBits >= 8) {
-		////TCCR1B &= ~(1 << CS10);
-		////update = 1;
-	////}
-	//TCCR1B &= ~(1 << CS10);
-	//readChar = 'R';
-	//update = 1;
-//}
-//
-//int main(void)
-//{
-	//initSoftwareUARTSend();
-	//initSoftwareUARTReceive();
-	//while(1) {
-		//if (update) {
-			//cli();
-			//sendByte(readChar);
-			//update = 0;
-			//sei();
-		//}
-		////testSoftwareUARTSend();
-	//}
-//}
-
 void initBleUARTSend() {
 	DDRD |= (1<<PORTD6);
 	TCCR1B |= (1 << WGM12);
 	OCR1A = 1152;
 }
-
-//void initBleUARTReceive() {
-	//resetBleBuffer();
-	//DDRD &= ~(1<<DDD7);
-	//PORTD &= ~(1<<PORTD7);
-	//TCCR0B |= (1 << WGM01);
-	//OCR0A = 18;
-	//PCICR |= (1 << PCIE2);
-	//PCMSK2 |= (1 << PCINT23);
-	//sei();
-//}
 
 void initBleUARTReceive() {
 	DDRD &= ~(1<<DDD7);
@@ -146,28 +93,33 @@ void initBleUARTReceive() {
 }
 
 void resetBleBuffer() {
-	disableBleInterupt();
+	unsigned char interruptState;
+	interruptState = atomicBlockBleBegin();
+
 	for (int i = 0; i < BLE_BUFFER_SIZE; i++) bleBuffer[i] = 0;
 	bleInBufferStartIndex = bleInBufferEndIndex = 0;
-	enableBleInterupt();
+
+	atomicBlockBleEnd(interruptState);
 }
 
 void bleSerialPrint(const unsigned char *c) {
 	unsigned char i;
-	disableBleInterupt();
 	for (i=0; c[i] != 0; i++) {
+		unsigned char interruptState;
+		interruptState = atomicBlockBleBegin();
 		bleSendByte(c[i]);
+		atomicBlockBleEnd(interruptState);
 	}
-	enableBleInterupt();
 }
 
 void blePrintBuffer() {
 	unsigned char i;
-	disableBleInterupt();
 	for (i=0; bleBuffer[i] != 0 && i < BLE_BUFFER_SIZE; i++) {
+		unsigned char interruptState;
+		interruptState = atomicBlockBleBegin();
 		bleSendByte(bleBuffer[i]);
+		atomicBlockBleEnd(interruptState);
 	}
-	enableBleInterupt();
 }
 
 void bleSerialPrintInt(const int i) {
@@ -218,7 +170,9 @@ void bleSendBit(unsigned char b) {
 }
 
 void bleBufferRead(unsigned int numBytes, unsigned char *buffer) {
-	disableBleInterupt();
+	unsigned char interruptState;
+	interruptState = atomicBlockBleBegin();
+
 	unsigned int i;
 	while (((bleInBufferEndIndex-bleInBufferStartIndex+BLE_BUFFER_SIZE)%BLE_BUFFER_SIZE) < numBytes);
 	for (i=0U; i<numBytes; i++) {
@@ -226,13 +180,17 @@ void bleBufferRead(unsigned int numBytes, unsigned char *buffer) {
 	}
 	buffer[i] = 0;
 	bleInBufferStartIndex = (bleInBufferStartIndex + numBytes)%BLE_BUFFER_SIZE;
-	enableBleInterupt();
+
+	atomicBlockBleEnd(interruptState);
 }
 
 void bleBufferReadAll(unsigned char *buffer) {
 	unsigned char bufferLen = (bleInBufferEndIndex-bleInBufferStartIndex+BLE_BUFFER_SIZE)%BLE_BUFFER_SIZE;
 	if (bufferLen > 0) {
+		unsigned char interruptState;
+		interruptState = atomicBlockBleBegin();
 		bleBufferRead(bufferLen, buffer);
+		atomicBlockBleEnd(interruptState);
 	}
 }
 
@@ -252,6 +210,9 @@ void bleBufferReadAll(unsigned char *buffer) {
 	  unsigned char i = 0;
 	  while (i == 0)
 	  i = serialBleFind(stopChar) + 1;
+	  unsigned char interruptState;
+	  interruptState = atomicBlockBleBegin();
 	  bleBufferRead(i, buffer);
+	  atomicBlockBleEnd(interruptState);
 	  return;
   }

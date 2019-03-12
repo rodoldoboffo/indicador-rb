@@ -8,41 +8,7 @@
 #include "indicator.h"
 #include "mystdlib.h"
 #include <util/delay.h>
-//
-//void uitoa(unsigned int v, unsigned char *str) {
-	//return litoa((long int)v, str);
-//}
-//
-//void ultoa(unsigned long v, unsigned char *str) {
-	//return litoa((long int)v, str);
-//}
-//
-//void itoa(int v, unsigned char *str) {
-	//return litoa((long int)v, str);
-//}
-//
-//void litoa(long int v, unsigned char *str) {
-	//unsigned char aux_str[MAX_STDLIB_STR_LEN], i=0, j=0, k=0;
-	//if (v < 0) {
-		//str[j] = '-';
-		//v = v * -1;
-		//j++;
-	//}
-	//for ( ; v != 0; i++) {
-		//aux_str[i] = (v % 10) + '0';
-		//v = v / 10;
-	//}
-	//if (i == 0) {
-		//aux_str[i] = '0';
-		//i++;
-	//}
-	//for (k = 0; k < i; k++, j++) {
-		//str[j] = aux_str[i-k-1];
-	//}
-	//str[j] = '\0';
-	//return;
-//}
-//
+
 unsigned char* ftoa(float v, unsigned char *str, unsigned int decimalPlaces) {
 	unsigned char aux_str[MAX_STDLIB_STR_LEN], i=0, j=0, k=0;
 	long intValue;

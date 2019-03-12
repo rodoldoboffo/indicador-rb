@@ -156,6 +156,12 @@
     <Compile Include="mystdlib.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="myutil.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="myutil.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="software_uart_ble.c">
       <SubType>compile</SubType>
     </Compile>

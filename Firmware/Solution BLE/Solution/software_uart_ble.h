@@ -11,7 +11,12 @@
 #define BLE_BUFFER_SIZE 24
 #include <time.h>
 
+unsigned char atomicBlockBleBegin();
+void atomicBlockBleEnd(unsigned char currentState);
+
+void receiveBleByte();
 void resetBleBuffer();
+
 void bleSendByte(unsigned char c);
 void bleSendBit(unsigned char b);
 void bleSerialPrint(const unsigned char *c);

@@ -15,6 +15,8 @@
 void initializeSystem();
 
 void processBLEMessages();
-void bleSendADValue();
+long int getADValue();
+void sendADValueToBle(long int adValue);
+void sendStateToBle(long int adValue, unsigned char relay);
 
 #endif /* INDICATOR_H_ */

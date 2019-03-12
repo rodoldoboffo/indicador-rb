@@ -15,5 +15,6 @@ void initializeRelay(unsigned char onOff);
 void relayTurnOn();
 void relayTurnOff();
 void relayOnOff(unsigned char onOff);
+unsigned char relayGetState();
 
 #endif /* SSR_H_ */
