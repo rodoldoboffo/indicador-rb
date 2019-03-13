@@ -12,6 +12,7 @@
  *  Author: Rodolfo
  */ 
  
+#include <util/atomic.h>
 #include "indicator.h"
 #include "software_uart_ble.h"
 #include "mystdlib.h"
@@ -28,15 +29,17 @@ volatile unsigned char bleInBufferEndIndex=0;
 
 unsigned char atomicBlockBleBegin() {
 	unsigned char currentState;
-	cli();
-	currentState = PCMSK2 & (1 << PCINT23);
-	disableBleInterupt();
+	ATOMIC_BLOCK(ATOMIC_FORCEON) {
+		currentState = PCMSK2 & (1 << PCINT23);
+		PCMSK2 &= ~(1 << PCINT23);
+	}
 	return currentState;
 }
 
 void atomicBlockBleEnd(unsigned char currentState) {
-	if (currentState) enableBleInterupt();
-	sei();
+	ATOMIC_BLOCK(ATOMIC_FORCEON) {
+		if (currentState) PCMSK2 |= (1 << PCINT23);
+	}
 }
 
 void receiveBleByte() {
