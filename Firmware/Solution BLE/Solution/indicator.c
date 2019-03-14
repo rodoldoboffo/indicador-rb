@@ -30,7 +30,6 @@ void initializeSystem() {
 	initBleUARTReceive();
 	adcInitialize(1);
 	initializeRelay(0);
-	_delay_ms(800);
 	bleSerialPrint(READY);
 }
 
