@@ -61,6 +61,7 @@ void receiveBleByte() {
 		}
 		bleBuffer[bleInBufferEndIndex] = readChar;
 		bleInBufferEndIndex = (bleInBufferEndIndex + 1)%BLE_BUFFER_SIZE;
+		if (bleInBufferEndIndex == bleInBufferStartIndex) bleInBufferStartIndex = (bleInBufferStartIndex + 1)%BLE_BUFFER_SIZE;
 	}
 }
 
