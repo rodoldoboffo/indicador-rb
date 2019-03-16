@@ -14,7 +14,7 @@
 unsigned char atomicBlockBleBegin();
 void atomicBlockBleEnd(unsigned char currentState);
 
-void receiveBleByte();
+unsigned char receiveBleByte();
 void resetBleBuffer();
 
 void bleSendByte(unsigned char c);
