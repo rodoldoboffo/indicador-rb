@@ -26,10 +26,10 @@ const unsigned char READY[] = "ready\n";
 long int globalADValue = 0L;
 
 void initializeSystem() {
-	initBleUARTSend();
-	initBleUARTReceive();
 	adcInitialize(1);
 	initializeRelay(0);
+	initBleUARTSend();
+	initBleUARTReceive();
 	bleSerialPrint(READY);
 }
 
