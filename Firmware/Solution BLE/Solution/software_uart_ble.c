@@ -42,7 +42,7 @@ void atomicBlockBleEnd(unsigned char currentState) {
 	}
 }
 
-void receiveBleByte() {
+unsigned char receiveBleByte() {
 	unsigned char i, readChar=0;
 	if (!(PIND & (1<<PORTD7))) {
 		OCR1A = 576;
@@ -63,12 +63,14 @@ void receiveBleByte() {
 		bleInBufferEndIndex = (bleInBufferEndIndex + 1)%BLE_BUFFER_SIZE;
 		if (bleInBufferEndIndex == bleInBufferStartIndex) bleInBufferStartIndex = (bleInBufferStartIndex + 1)%BLE_BUFFER_SIZE;
 	}
+	return readChar;
 }
 
 ISR(PCINT2_vect) {
 	unsigned char interruptState;
 	interruptState = atomicBlockBleBegin();
-	receiveBleByte();
+	unsigned char c = receiveBleByte();
+	if (c == ';') processBLEMessages();
 	atomicBlockBleEnd(interruptState);
 }
 

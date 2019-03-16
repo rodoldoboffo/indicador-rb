@@ -14,7 +14,6 @@ int main(void)
 	initializeSystem();
 	while (1)
 	{
-		processBLEMessages();
-		_delay_ms(10);
+		
 	}
 }
